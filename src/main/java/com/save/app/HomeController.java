@@ -18,23 +18,24 @@ public class HomeController {
 	Gson gson = new Gson();
 
 	@ResponseBody
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public void home(HttpServletRequest request) {
+	@RequestMapping(value = "/data", method = RequestMethod.GET)
+	public String home(HttpServletRequest request) {
 		try {
+			//System.out.println("Request Received.......");
 			if (request.getParameter("location") != null) {
-				logger.info("---- Location=" + request.getParameter("location") + ","
-						+ TimeStampUtil.getCurrentTimeStamp());
+				logger.info("---- Location=" + request.getParameter("location"));
 				String location[] = request.getParameter("location").split(",");
 				GpsCoordinates coordinates1 = new GpsCoordinates();
 				coordinates1.setLatitude(location[0]);
 				coordinates1.setLongitude(location[1]);
-				coordinates1.setTimestamp(TimeStampUtil.getCurrentTimeStamp());
+				coordinates1.setTimestamp(location[2] +" "+location[3]+" "+location[4]);
 				GpsUtil.setCoordinates(coordinates1);
 
 			}
 		} catch (Exception e) {
 			logger.error("Exception:  " + e.getMessage());
 		}
+		return "ok";
 	}
 
 	@RequestMapping(value = "/map", method = RequestMethod.GET)
