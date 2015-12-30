@@ -18,7 +18,7 @@ public class HomeController {
 	Gson gson = new Gson();
 
 	@ResponseBody
-	@RequestMapping(value = "/data", method = RequestMethod.GET)
+	@RequestMapping(value = {"/","/data"}, method = RequestMethod.GET)
 	public String home(HttpServletRequest request) {
 		try {
 			//System.out.println("Request Received.......");
@@ -28,7 +28,7 @@ public class HomeController {
 				GpsCoordinates coordinates1 = new GpsCoordinates();
 				coordinates1.setLatitude(location[0]);
 				coordinates1.setLongitude(location[1]);
-				coordinates1.setTimestamp(location[2] +" "+location[3]+" "+location[4]);
+				coordinates1.setTimestamp(TimeStampUtil.getCurrentTimeStamp());
 				GpsUtil.setCoordinates(coordinates1);
 
 			}

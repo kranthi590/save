@@ -36,6 +36,7 @@
 	          console.log(/* "Coordinates recieved: " + */ obj);
 	          var latLng = new google.maps.LatLng(parseFloat(obj.latitude),parseFloat( obj.longitude));
 	          marker.setPosition(latLng);
+	          map.panTo(marker.getPosition());
 	          $("#last_known").empty().html("Last Known Coordinates: <b>"+obj.latitude+","
 	              + obj.longitude+" At: "+obj.timestamp+" </b>");
 	          geocoder.geocode({
